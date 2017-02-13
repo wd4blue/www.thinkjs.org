@@ -467,7 +467,7 @@ export default class extends think.controller.base {
 #### model.table(table, hasPrefix)
 
 * `table` {String} 表名
-* `hasPrefix` {Boolean} 是否已经有了表前缀，如果 table 值含有空格，则不在添加表前缀
+* `hasPrefix` {Boolean} 是否已经有了表前缀，如果 table 值含有空格，则不再添加表前缀
 * `return` {this}
 
 设置表名，可以将一个 SQL 语句设置为表名。
@@ -537,8 +537,8 @@ export default class extends think.model.base {
 ```js
 export default class extends think.model.base {
   getList(){
-    //SELECT * FROM `think_user` LEFT JOIN think_cate ON think_group.cate_id=think_cate.id
-    return this.join('think_cate ON think_group.cate_id=think_cate.id').select();
+    //SELECT * FROM `think_user` LEFT JOIN think_cate ON think_user.cate_id=think_cate.id
+    return this.join('think_cate ON think_user.cate_id=think_cate.id').select();
   }
 }
 ```
@@ -548,10 +548,10 @@ export default class extends think.model.base {
 ```js
 export default class extends think.model.base {
   getList(){
-    //SELECT * FROM `think_user` LEFT JOIN think_cate ON think_group.cate_id=think_cate.id RIGHT JOIN think_tag ON think_group.tag_id=think_tag.id
+    //SELECT * FROM `think_user` LEFT JOIN think_cate ON think_user.cate_id=think_cate.id RIGHT JOIN think_tag ON think_user.tag_id=think_tag.id
     return this.join([
-      'think_cate ON think_group.cate_id=think_cate.id', 
-      'RIGHT JOIN think_tag ON think_group.tag_id=think_tag.id'
+      'think_cate ON think_user.cate_id=think_cate.id', 
+      'RIGHT JOIN think_tag ON think_user.tag_id=think_tag.id'
     ]).select();
   }
 }
